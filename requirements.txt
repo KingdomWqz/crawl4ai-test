@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+pydantic
+crawl4ai
+requests  # 用于测试脚本

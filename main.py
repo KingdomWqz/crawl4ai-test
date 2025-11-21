@@ -4,8 +4,8 @@ from datetime import datetime
 import os
 
 app = FastAPI(
-    title="Coze API",
-    description="一个简单的 FastAPI 应用",
+    title="Crawl4AI API",
+    description="Crawl4AI API",
     version="1.0.0"
 )
 
@@ -13,7 +13,7 @@ app = FastAPI(
 security = HTTPBearer()
 
 # API Key（从环境变量读取，默认值仅用于演示）
-API_KEY = os.getenv("COZE_API_KEY", "your-secret-api-key-here")
+API_KEY = os.getenv("API_KEY", "api-key-here")
 
 async def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(security)):
     """
@@ -29,6 +29,7 @@ async def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(se
         )
     return credentials.credentials
 
+
 @app.get("/check", dependencies=[Depends(verify_api_key)])
 async def check():
     """健康检查接口（需要鉴权）"""
@@ -37,8 +38,6 @@ async def check():
         "message": "服务运行正常",
         "timestamp": datetime.now().isoformat()
     }
-
-
 
 
 if __name__ == "__main__":
